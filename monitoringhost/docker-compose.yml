@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+
+  prometheus:
+    restart: unless-stopped
+    image: prom/prometheus:v2.2.1
+    ports:
+     - 9090:9090
+    volumes:
+      - prometheus-storage:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    restart: unless-stopped
+    image: grafana/grafana:5.0.4
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  prometheus-storage:
+  grafana-storage:
+  
